@@ -4,22 +4,37 @@ import java.util.Random;
 
 public class CreditCard {
     private static final String bin = "400000";
-    private final String cardNumber;
-    private final String pin;
+    private String cardNumber;
+    private String pin;
+    private int balance;
 
-    private final Random ran = new Random();
+    private static final Random ran = new Random();
 
     public CreditCard() {
         cardNumber = generateCardNumber();
         pin = generatePin();
     }
 
+
     public String getCardNumber() {
         return cardNumber;
+    }
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
     public String getPin() {
         return pin;
+    }
+    public void setPin(String pin) {
+        this.pin = pin;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 
     private String generateCardNumber() {
@@ -34,7 +49,7 @@ public class CreditCard {
         return String.format("%04d", makePin);
     }
 
-    public static String calculateCheckSum(String ccNumber) {
+    private String calculateCheckSum(String ccNumber) {
         if (ccNumber == null)
             return null;
         String digit;
@@ -60,6 +75,7 @@ public class CreditCard {
 
         digit = sum + "";
         return digit.substring(digit.length() - 1);
+        //https://www.admfactory.com/luhn-algorithm-implementation-in-java/
     }
 
     @Override
@@ -67,8 +83,7 @@ public class CreditCard {
         return "CreditCard{" +
                 "cardNumber='" + cardNumber + '\'' +
                 ", pin='" + pin + '\'' +
-                ", ran=" + ran +
+                ", balance=" + balance +
                 '}';
     }
 }
-//https://www.admfactory.com/luhn-algorithm-implementation-in-java/
